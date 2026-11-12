@@ -1,7 +1,7 @@
 // Navbar.tsx
 
 import { useState } from 'react';
-import '../index.css';
+import { NavLink } from 'react-router';
 
 interface NavLinkType {
   name: string,
@@ -27,16 +27,18 @@ export default function Navbar() {
 
         <div className="navbar-links">
           {navLinks.map(item => (
-            <a key={item.path} href={item.path} className="navbar-link">
+            <NavLink key={item.path} to={item.path} className="navbar-link">
               {item.name}
-            </a>
+            </NavLink>
           ))}
         </div>
 
         <button
           className="navbar-toggle"
+          type="button"
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Toggle navigation"
+          aria-expanded={isOpen}
         >
           {isOpen ? '✕' : '☰'}
         </button>
@@ -44,14 +46,14 @@ export default function Navbar() {
       {isOpen && (
         <div className="navbar-menu-mobile">
           {navLinks.map(item => (
-            <a 
+            <NavLink 
               key={item.path}
-              href={item.path}
+              to={item.path}
               className="navbar-link-mobile"
               onClick={() => setIsOpen(false)}
             >
               {item.name}
-            </a>
+            </NavLink>
           ))}
         </div>
       )}

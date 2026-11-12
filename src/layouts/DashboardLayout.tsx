@@ -1,12 +1,9 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { Menu } from "lucide-react";
+import { Outlet } from "react-router";
 import Sidebar from "../components/Sidebar";
 
-type DashboardLayoutProps = {
-  children: ReactNode;
-};
-
-function DashboardLayout({ children }: DashboardLayoutProps) {
+function DashboardLayout() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
@@ -30,7 +27,9 @@ function DashboardLayout({ children }: DashboardLayoutProps) {
           <span className="dashboard-header-title">Area studente</span>
         </header>
 
-        <main className="dashboard-content">{children}</main>
+        <main className="dashboard-content">
+          <Outlet />
+        </main>
       </div>
     </div>
   );

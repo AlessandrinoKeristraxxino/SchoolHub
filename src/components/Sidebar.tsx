@@ -6,6 +6,7 @@ import {
   UserRound,
   X,
 } from "lucide-react";
+import { NavLink } from "react-router";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -20,8 +21,6 @@ const navigationItems = [
 ];
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
-  const currentPath = window.location.pathname;
-
   return (
     <>
       {isOpen && (
@@ -52,19 +51,19 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <p className="sidebar-section-label">MENU</p>
         <nav className="sidebar-navigation" aria-label="Navigazione principale">
           {navigationItems.map(({ label, href, icon: Icon }) => {
-            const isActive = currentPath === href;
-
             return (
-              <a
+              <NavLink
                 key={href}
-                href={href}
-                className={`sidebar-link${isActive ? " sidebar-link-active" : ""}`}
-                aria-current={isActive ? "page" : undefined}
+                to={href}
+                end={href === "/"}
+                className={({ isActive }) =>
+                  `sidebar-link${isActive ? " sidebar-link-active" : ""}`
+                }
                 onClick={onClose}
               >
                 <Icon size={19} strokeWidth={1.9} aria-hidden="true" />
                 <span>{label}</span>
-              </a>
+              </NavLink>
             );
           })}
         </nav>
